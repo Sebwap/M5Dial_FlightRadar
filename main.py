@@ -110,7 +110,7 @@ def refresh_data(lat_min,lat_max,lon_min,lon_max):
         if cle!="full_count" and cle!="version" and cle!="stats":
             dist = distanceGPS(valeur[1],valeur[2], LAT_DOM, LON_DOM)
             angle=angle_bearing(LAT_DOM, LON_DOM,valeur[1],valeur[2])
-            if dist<20000:
+            if dist<RAYON_PLANE:
                 #print("CallSign:",valeur[16], "Registration:",valeur[9],"Vol:",valeur[13], "Lat:",valeur[1],"Lon:",valeur[2],"Alt:",valeur[4],"Cap:",valeur[3],"Distance:",dist, "Angle tracé",angle )
 
                 tab_point=[]
@@ -269,8 +269,8 @@ def launch():
             #print(item)
             # pour tracer le point,  faire angle=90-angle (différence entre l'angle géométrique et l'angle du cap par rapport au nord). Nord = 90° trigo, et ça tourne dans l'autre sens
             angle_trace=90-item[4]
-            x=120+math.cos(math.radians(angle_trace))*(item[5]*rayon/20000)
-            y=120-math.sin(math.radians(angle_trace))*(item[5]*rayon/20000)
+            x=120+math.cos(math.radians(angle_trace))*(item[5]*rayon/RAYON_PLANE)
+            y=120-math.sin(math.radians(angle_trace))*(item[5]*rayon/RAYON_PLANE)
             draw_plane(x,y,item[3])
             #libellé
             Lcd.setFont(Lcd.FONTS.EFontCN24)
